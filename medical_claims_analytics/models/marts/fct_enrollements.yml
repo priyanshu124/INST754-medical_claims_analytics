@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: fct_enrollements
+    description: Fact table containing enrollment information for patients
+    columns:
+      - name: enrollement_sk
+        tests:
+          - not_null
+          - unique
+
+      - name: patient_id
+        tests:
+          - not_null
+        relationships:
+          to: ref('dim_patients')
+          field: patient_id
+
+      - name: enrollement_start_date
+        tests:
+          - not_null

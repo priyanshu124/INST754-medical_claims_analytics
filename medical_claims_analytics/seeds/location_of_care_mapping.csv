@@ -1,0 +1,27 @@
+location_of_care,category
+ALL OTHER,other
+AMBULANCE,outpatient
+AMBULATORY SURGICAL CENTER,outpatient
+BIRTHING CENTER,outpatient
+HOME HEALTH,outpatient
+HOSPICE,outpatient
+HOSPITAL ER,emergency room
+HOSPITAL IP,inpatient
+HOSPITAL OP,outpatient
+HOSPITAL OTHER,inpatient
+INDEPENDENT LAB,outpatient
+MASS IMMUNIZATION CENTER,outpatient
+MENTAL HEALTH CENTER,outpatient
+MOBILE UNIT,outpatient
+NURSING FACILITY,inpatient
+OFFICE/CLINIC,outpatient
+PHARMACY,outpatient
+PLACE OF EMPLOYMENT,outpatient
+REHABILITATION FACILITY,inpatient
+RENAL DIALYSIS CENTER,outpatient
+SCHOOL,outpatient
+SKILLED NURSING FACILITY,inpatient
+SUBSTANCE ABUSE,outpatient
+TELEHEALTH,outpatient
+UNKNOWN,other
+URGENT CARE,inpatient

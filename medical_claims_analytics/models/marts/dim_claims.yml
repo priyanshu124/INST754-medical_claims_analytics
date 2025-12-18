@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: dim_claims
+    description: Claim dimension table with claim level attributes
+    columns:
+      - name: claim_id
+        tests:
+          - not_null
+          - unique
+      - name: patient_id
+        tests:
+          - not_null
+        relationships:
+          to: ref('dim_patients')
+          field: patient_id

@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fct_pharmacy_lines
+    description: Fact table containing pharmacy claim lines with costs assocaited to drug prescriptions
+    
+    columns:
+      - name: pharmacy_lines_sk
+        tests:
+          - not_null
+          - unique
+
+      - name: claim_id
+        tests:
+          - not_null
+        relationships:
+          to: ref('dim_claims')
+          field: claim_id
+
+      - name: drug_ndc
+        tests:
+          - not_null
+
+      - name: claim_service_start_date
+        tests:
+          - not_null
+      

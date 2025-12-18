@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: dim_procedure_codes
+    description: Procedure Codes dimension table
+    columns:
+
+      - name: procedure_code
+        tests:
+          - not_null
+          - unique
+
+      - name: title
+        tests:
+          - not_null
+      

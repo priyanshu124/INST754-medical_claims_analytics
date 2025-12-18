@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct_diagnosis
+    description: Fact table containing diagnosis lines for claims
+    columns:
+
+      - name: claim_diagnosis_sk
+        tests:
+          - not_null
+          - unique
+
+      - name: claim_id
+        tests:
+          - not_null
+        relationships:
+          to: ref('dim_claims')
+          field: claim_id
+
+      - name: diagnosis_code
+        tests:
+          - not_null
+        relationships:
+          to: ref('dim_diagnosis_codes')
+          field: diagnosis_code
+

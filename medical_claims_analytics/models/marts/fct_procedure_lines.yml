@@ -1,0 +1,32 @@
+ersion: 2
+
+models:
+  - name: fct_procedure_lines
+    description: Fact table containing procedure lines for claims
+    columns:
+
+      - name: procedure_lines_sk
+        tests:
+          - not_null
+          - unique
+
+      - name: claim_id
+        tests:
+          - not_null
+        relationships:
+          to: ref('dim_claims')
+          field: claim_id
+
+      - name: procedure_code
+        tests:
+          - not_null
+        relationships:
+          to: ref('dim_procedure_codes')
+          field: procedure_code
+
+      - name: procedure_service_start_date
+        tests:
+          - not_null
+      - name: service_line_number
+        tests:
+          - not_null

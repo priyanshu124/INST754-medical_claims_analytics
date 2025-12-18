@@ -1,0 +1,202 @@
+
+version: 2
+
+models:
+  - name: stg_enrollment
+    description: "Staging model for enrollments"
+    columns:
+      - name: patient_id
+        tests:
+          - not_null
+
+      - name: patient_sex
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['M', 'F', 'Unknown']
+
+      - name: patient_year_of_birth
+        tests:
+          - not_null
+
+      - name: patient_zip3
+        description: "The first three digits of the U.S. postal code for the residence of the person on this record."
+        tests:
+          - validate_format:
+              pattern: '[0-9][0-9][0-9]'
+
+      - name: patient_state
+        description: "The two-character postal code for the state in which the person resides."
+        tests:
+          - validate_format:
+              pattern: '[A-Z][A-Z]'
+
+      - name: enrollment_start_date
+        tests:
+          - not_null
+          - validate_date:
+              min_date: '1900-01-01'
+
+      - name: enrollment_end_date
+        tests:
+          - validate_date:
+              min_date: '1900-01-01'
+              start_date_column: enrollment_start_date
+
+      - name: benefit_type
+
+
+      - name: pay_type
+    
+
+  - name: stg_medical_claim
+    description: "Staging model for claims"
+    columns:
+      - name: patient_id
+        tests:
+          - not_null
+        
+      - name: claim_id
+        tests:
+          - not_null
+
+      - name: claim_service_start_date
+        tests:
+          - not_null
+          - validate_date:
+              min_date: '1900-01-01'
+
+      - name: claim_service_end_date
+        tests:
+          - validate_date:
+              min_date: '1900-01-01'
+              start_date_column: claim_service_start_date
+
+      - name: location_of_care
+
+      - name: pay_type
+      
+
+  - name: stg_pharmacy_claim
+    description: "Staging model for pharmacy claims"
+    columns:
+      - name: patient_id
+        tests:
+          - not_null    
+      - name: claim_id
+        tests:
+          - not_null
+      - name: claim_service_start_date
+        tests:
+          - not_null
+          - validate_date:
+              min_date: '1900-01-01'
+      - name: fill_number
+        description: "The number of times the patient has refilled this prescription, not including the original dispensing."
+
+      - name: days_supply
+        description: "The number of days the prescription should last, based on the prescribed dose and the quantity dispensed."
+
+      - name: dispensed_quantity
+        description: "The number of units of this drug or therapeutic substance delivered to the patient."
+
+      - name: submitted_gross_amount
+        description: "The total amount claimed by the pharmacy from the payer, for all sources."
+
+      - name: allowed_total_amount
+        description: "The total amount to be paid by the claims processor (i.e. pharmacy receivable)."
+
+      - name: patient_pay_amount
+        description: "The amount to be collected from the patient, included in 'Patient Pay Amount' , that is due to a per prescription copay. "
+      - name: pay_type
+
+
+
+  - name: stg_procedure
+    description: "Staging model for procedures"
+    columns:
+      - name: patient_id
+        tests:
+          - not_null   
+
+      - name: claim_id
+        tests:
+          - not_null
+
+      - name: service_line_number
+        description: "An integer representing the sequence for this service line within the claim. "
+        tests:
+          - not_null
+
+      - name: procedure_service_start_date
+        description: "TThe calendar date on which the services referred to in this claim were rendered. "
+        tests:
+          - not_null
+          - validate_date:
+              min_date: '1900-01-01'
+
+      - name: procedure_service_end_date
+        description: "The calendar date on which the services referred to in this claim ended."
+        tests:
+          - validate_date:
+              min_date: '1900-01-01'
+              start_date_column: procedure_service_start_date
+
+      - name: procedure_code
+        description: "A code indicating the course of action taken by the healthcare practitioner. "
+        tests:
+          - not_null
+      - name: procedure_qualifier
+
+      - name: modifier_code_1
+      - name: modifier_code_2
+      - name: modifier_code_3
+      - name: modifier_code_4
+        description: "Codes that provide additional information about the procedure performed."
+
+      - name: procedure_units
+        description: "The number of units of the procedure performed."
+
+      - name: charged_amount
+        description: "The total amount charged for the procedure."
+
+      - name: allowed_amount
+        description: "The total amount to be paid for the procedure."
+
+
+      - name: revenue_code
+        description: "A standard NUBC revenue code from the UB claim form."
+
+
+
+
+  - name: stg_diagnosis
+    description: "Staging model for diagnosis"
+    columns:
+      - name: patient_id
+        tests:
+          - not_null        
+      - name: claim_id
+        tests:
+          - not_null
+      - name: diagnosis_service_start_date
+        tests:
+          - not_null
+          - validate_date:
+              min_date: '1900-01-01'
+      - name: diagnosis_service_end_date
+        tests:
+          - validate_date:
+              min_date: '1900-01-01'
+              start_date_column: diagnosis_service_start_date
+      - name: diagnosis_code
+        description: "A code indicating the patient's disease, injury, or condition, as identified by a healthcare practitioner."
+        tests:
+          - not_null
+      - name: diagnosis_qualifier
+
+      - name: admit_diagnosis_ind
+        description: "A flag indicating whether the diagnosis reported on an institutional claim represents the admitting diagnosis."
+        tests:
+          - accepted_values:
+              values: ['Y', 'N', '']

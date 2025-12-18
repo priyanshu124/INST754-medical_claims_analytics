@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_diagnosis_codes
+    description: Diagnosis Codes dimension table
+    columns:
+      - name: diagnosis_code
+        tests:
+          - not_null
+          - unique
+
+      - name: description
+        tests:
+          - not_null
+          - unique
+        
+

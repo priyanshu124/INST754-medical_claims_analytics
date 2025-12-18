@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw      # the schema where your raw tables live
+    database: health_verity_claims_dataset
+    tables:
+      - name: enrollment
+        description: "Raw patients enrollemnt data"
+      - name: medical_claim
+        description: "Raw claims data"
+      - name: pharmacy_claim
+        description: "Raw pharmacy claims data"
+      - name: diagnosis
+        description: "Raw diagnoses data"
+      - name: procedure
+        description: "Raw procedures data"
+      - name: diagnosis_codes
+        description: "Raw diagnosis codes description data"
+      - name: procedure_codes
+        description: "Raw procedure codes description data"
+       
